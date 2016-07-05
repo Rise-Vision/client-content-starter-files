@@ -1,0 +1,74 @@
+/*=======
+Colour Mixins
+=======*/
+
+$gray : #BBBABA;
+$white : #FFF;
+$black : #000;
+$textBlack : #333;
+$buttonGreen : #9EBB3B;
+
+/*=======
+Partials
+=======*/
+
+@mixin mainWrapper {
+  width: 1920px;
+  height: 1080px;
+}
+
+@mixin shadowShallow {
+  box-shadow: 0 1px 3px rgba(0,0,0, 0.15);
+}
+
+@mixin shadowDeep {
+  box-shadow:0 14px 14px rgba(0,0,0,0.2);
+}
+
+@mixin buttonArrow {
+  position: absolute;
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  top:0;
+  left:0;
+  background-color:$buttonGreen;
+  transition:all 0.7s;
+
+    .line1, .line2 {
+    position: absolute;
+    background-color:$white;
+    width:20px;
+    height:5px;
+    border-radius:2px;
+  }
+
+  .line1 {
+    transform:rotate(-45deg);
+    top:31px;
+    left:30px;
+    transition:all 0.5s;
+  }
+
+  .line1--moved {
+    transform:rotate(45deg);
+  }
+
+  .line2 {
+    transform:rotate(45deg);
+    top:31px;
+    left:19px;
+    transition:all 0.5s;
+  }
+
+  .line2--moved {
+    transform:rotate(-45deg);
+  }
+}
+
+
+@import 'partials';
+
+.button--arrow-down {
+  @include buttonArrow;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "client-content-starter-file",
+  "authors": [
+    "Rise Vision"
+  ],
+  "description": "Starter files and common styles for custom HTML content",
+  "license": "GPLv3",
+  "homepage": "https://github.com/Rise-Vision/client-content-starter-files",
+  "ignore": [
+    "/.*",
+    "/node_modules"
+  ],
+  "dependencies": {
+    "auto-scroll": "https://github.com/Rise-Vision/auto-scroll.git",
+    "jquery": "2.1.4",
+    "rise-google-sheet": "https://github.com/Rise-Vision/rise-google-sheet.git#1.1.0"
+  }
+}
