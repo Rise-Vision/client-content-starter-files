@@ -5,11 +5,9 @@ function goHome() {
 
 // Set Timer
 function setIdleTimer(id) {
-    if (id && id != "1") {
       $.idleTimer(180000); //time in milli
       $(document).bind("idle.idleTimer", function(){
         $.idleTimer('destroy');
         goHome();
       });
-    }
 }
