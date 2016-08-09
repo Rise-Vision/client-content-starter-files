@@ -15,9 +15,6 @@
         function displayResults(results) {
           var results = results;
           results.shift();
-
-          console.log(results);
-
           var people = results.map(function(person){
 
             return `<li>
