@@ -27,6 +27,10 @@ gulp.task("styles", function(){
 
 gulp.task('lint', function() {
   return gulp.src('src/scripts/**/*.js').pipe(eslint({
+    'rules':{
+        'quotes': [1, 'double'],
+        'semi': [1, 'always']
+      }
     }))
   .pipe(eslint.format('stylish'))
   // Brick on failure to be super strict

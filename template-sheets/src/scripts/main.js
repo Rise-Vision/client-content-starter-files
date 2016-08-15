@@ -17,21 +17,28 @@
           results.shift();
           var people = results.map(function(person){
 
-            return `<li>
-                  <p class='column1'><img src=${person[0]}></p>
-                  <p class='name column2'>
-                    ${person[1]}
-                  </p>
-                  <p class='title column3'>
-                    ${person[2]}
-                  </p>
-                  <p class='phone column4'>
-                    ${person[3]}
-                  </p>
-                  <p class='email column5'>
-                    ${person[4]}
-                  </p>
-                </li>`;
+            return `<li
+                  data-image="${person[0]}"
+                  data-name="${person[1]}"
+                  data-title="${person[2]}"
+                  data-phone="${person[3]}"
+                  data-email="${person[4]}">
+                    <p class='column1'>
+                      <img src=${person[0]}>
+                    </p>
+                    <p class='name column2'>
+                      ${person[1]}
+                    </p>
+                    <p class='title column3'>
+                      ${person[2]}
+                    </p>
+                    <p class='phone column4'>
+                      ${person[3]}
+                    </p>
+                    <p class='email column5'>
+                      ${person[4]}
+                    </p>
+                  </li>`;
       });
 
         $(".list").append(people);
