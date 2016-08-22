@@ -18,7 +18,19 @@ $highlight : #E9FFED;
 $font-stack : 'Open Sans', Helvetica, sans-serif;
 $main-shadow : 5px 0 10px rgba(0,0,0,0.5);;
 
+@mixin shadowShallow {
+  box-shadow: 0 1px 3px rgba(0,0,0, 0.15);
+}
+
+@mixin shadowDeep {
+  box-shadow:0 14px 14px rgba(0,0,0,0.2);
+}
+
+
+@import 'partials';
 //colour variables
+
+
 
 body {
   font-family:$font-stack;

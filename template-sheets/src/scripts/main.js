@@ -17,7 +17,7 @@
           results.shift();
           var people = results.map(function(person){
 
-            return `<li
+            return `<li class="person"
                   data-image="${person[0]}"
                   data-name="${person[1]}"
                   data-title="${person[2]}"
