@@ -1,0 +1,59 @@
+/** COLOR VARIABLES **/
+$white : #ffffff;
+$ltgrey: #E0E0E0;
+$black : #333333;
+
+body {
+  overflow: hidden;
+}
+
+@mixin shadowShallow {
+  box-shadow: 0 1px 3px rgba(0,0,0, 0.15);
+}
+
+@mixin shadowDeep {
+  box-shadow:0 14px 14px rgba(0,0,0,0.4);
+}
+
+/**IMPORT STYLES FROM PARTIALS FILE**/
+@import 'partials';
+
+/**SCROLL BAR SKIN**/
+::-webkit-scrollbar {
+
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  height: 10px;
+  background-clip: padding-box;
+  -webkit-border-radius: 10px;
+  background-color: $red;
+
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: $opacity;
+  border-radius: 20px;
+  border: 20px solid transparent;
+  width:3px;
+}
+
+/**MAIN AREAS**/
+#wrapper {
+  font-family: 'Lato', sans-serif;
+  position: absolute;
+  top:0;
+  left:0;
+  width:1920px;
+  height:1080px;
+  background: $mainBackgroundGradient;
+}

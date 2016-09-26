@@ -1,0 +1,33 @@
+{
+  "name": "template build",
+  "version": "1.0",
+  "authors": [
+    "Peter Cameron <peter.cameron@risevision.com>,  Mathew Meiers <mlm@risedisplay.com>"
+  ],
+  "description": "template build",
+  "main": "index.html",
+  "keywords": [
+    "polymer",
+    "web-components",
+    "google-sheets"
+  ],
+  "license": "GPLv3",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test"
+  ],
+  "dependencies": {
+    "iron-ajax": "PolymerElements/iron-ajax#^1.0.0",
+    "polymer": "Polymer/polymer#^1.0.0",
+    "underscore": "~1.8.2",
+    "moment": "^2.14.0",
+    "rise-google-sheet": "https://github.com/Rise-Vision/rise-google-sheet.git#2.2.3"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "pure": "^0.6.0",
+    "web-component-tester": "*"
+  }
+}
