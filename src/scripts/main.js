@@ -43,17 +43,20 @@ function inActive(){
   navigation.showPage($target);
 
   //======
-  //add and rotate through any overlay cards
+
+  //add and rotate through any overlay cards but only if there is more than 1
   $(".page--overlay").css("display","block");
-  $(".page--overlay > div:gt(0)").hide();
-  slideshowInterval = setInterval(function() {
-    $(".page--overlay > div:first")
-      .fadeOut(700)
-      .next()
-      .fadeIn(300)
-      .end()
-      .appendTo(".page--overlay");
-  },  10000);
+  if($(".page--overlay div").length > 1){
+    $(".page--overlay > div:gt(0)").hide();
+    slideshowInterval = setInterval(function() {
+      $(".page--overlay > div:first")
+        .fadeOut(700)
+        .next()
+        .fadeIn(300)
+        .end()
+        .appendTo(".page--overlay");
+    },  10000);
+  }
   //======
 };
 
