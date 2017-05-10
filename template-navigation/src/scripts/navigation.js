@@ -1,11 +1,11 @@
-var navigation = navigation || {};
+var Navigation = Navigation || {};
 
-navigation = (function() {
+Navigation = (function() {
 
 	let $popup = $(".page--popup");
 	var isPopupVisible = false;
 
-  function showPage() {
+  function _showPage() {
 		$(".visible").removeClass("visible");
 		$(".button--selected").removeClass("button--selected");
 		$(this).addClass("button--selected");
@@ -14,27 +14,27 @@ navigation = (function() {
 		$(`section[data-page=${targetPage}]`).addClass("visible");
 
 		if (isPopupVisible) {
-			closePopup();
+			_closePopup();
 		};
   };
 
-  function openPopup() {
+  function _openPopup() {
   	isPopupVisible = true;
   	let popupData = $(this).data();
   	$popup.find("h2").text(popupData.name);
   	$popup.fadeIn();
   };
 
-  function closePopup() {
+  function _closePopup() {
   	$popup.fadeOut();
   	$popup.find("h2").text("");
   	isPopupVisible = false;
   };
 
   return {
-    showPage: showPage,
-   	openPopup: openPopup,
-    closePopup: closePopup
+    "showPage": _showPage,
+   	"openPopup": _openPopup,
+    "closePopup": _closePopup
   };
 
 })();

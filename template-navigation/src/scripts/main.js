@@ -14,19 +14,19 @@ $(function(){
   //=======
 
   //Show the selected page
-  $button.on("click", navigation.showPage);
+  $button.on("click", Navigation.showPage);
 
   //Show the home page
-  $logo.on("click", navigation.showPage);
+  $logo.on("click", Navigation.showPage);
 
   //Show donor popup
-  $donor.on("click", navigation.openPopup);
+  $donor.on("click", Navigation.openPopup);
 
   //Show event popup
-  $event.on("click", navigation.openPopup);
+  $event.on("click", Navigation.openPopup);
 
   //Hide popup
-  $closeButton.on("click", navigation.closePopup);
+  $closeButton.on("click", Navigation.closePopup);
 
   //=======
 
@@ -34,7 +34,7 @@ $(function(){
   //Check for user interaction and reset the timeout
   //counter if interation detected
   $(document).bind("click", function(){
-    timeoutController.resetActive();
+    TimeoutController.resetActive();
   });
 
 });

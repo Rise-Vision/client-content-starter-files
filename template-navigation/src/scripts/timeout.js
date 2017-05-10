@@ -1,31 +1,31 @@
-var timeoutController = timeoutController || {};
+var TimeoutController = TimeoutController || {};
 
-timeoutController = (function() {
+TimeoutController = (function() {
 
 	//set the timeout time
 	const timeoutTime = 10000;
 
 	/*reset presentation to initial state if
 	no activity for X seconds*/
-	let activityTimeout = setTimeout(timeoutController.inActive, timeoutTime);
+	let activityTimeout = setTimeout(TimeoutController.inActive, timeoutTime);
 
-	function resetActive(){
+	function _resetActive(){
 	  clearTimeout(activityTimeout);
-	  activityTimeout = setTimeout(inActive, timeoutTime);
+	  activityTimeout = setTimeout(TimeoutController.inActive, timeoutTime);
 	};
 
 	// No activity detected, then do all of this;
-	function inActive(){
+	function _inActive(){
 		$(".button--selected").removeClass("button--selected");
 		if ($(".page--popup").is(":visible")) {
-			navigation.closePopup();
+			Navigation.closePopup();
 		}
-	  navigation.showPage.call($(".area__navigation__logo"));
+	  Navigation.showPage.call($(".area__navigation__logo"));
 	};
 
 	return {
-		resetActive : resetActive,
-		inActive : inActive
+		"resetActive" : _resetActive,
+		"inActive" : _inActive
 	}
 
 })();
