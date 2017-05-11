@@ -82,15 +82,15 @@ Partials
   left: $l-position;
 }
 
-@mixin shadowShallow {
+%shadowShallow {
   box-shadow: $shadowShallow;
 }
 
-@mixin shadowDeep {
+%shadowDeep {
   box-shadow: $shadowDeep;
 }
 
-@mixin buttonArrow {
+%buttonArrow {
   position: absolute;
   width:68px;
   height:68px;
@@ -221,8 +221,6 @@ Partials
   }
 }
 
-@import 'partials';
-
 .button--arrow-down {
-  @include buttonArrow;
+  @extend %buttonArrow;
 }

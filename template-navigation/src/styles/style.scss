@@ -1,0 +1,153 @@
+@import "partials";
+
+//Example styles just for navigation testing
+
+main {
+  width:100vw;
+  height:100vh;
+  position: relative;
+  background:#AAAAAA;
+
+  section {
+    width:100%;
+    height:100vh;
+    position: absolute;
+    display:none;
+  }
+
+  .page__container {
+    width:90vw;
+    height:calc(100vh - 200px);
+    margin:3vh 5vw;
+    background:#FFFFFF;
+    border-radius:20px;
+    text-align:center;
+    @extend %shadowDeep;
+
+    h2 {
+      margin: 0;
+      font-size:60px;
+      color:#333;
+    }
+  }
+
+  .page--home__container {
+    background:#FFFFFF;
+  }
+
+  .page--donors__container {
+    background:#FFFFFF;
+
+    .list__container--donors {
+      list-style:none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        color:#333333;
+        padding:30px 40px;
+        background:#DEDEDE;
+        margin:20px 50px;
+        font-size:40px;
+      }
+    }
+  }
+
+  .page--events__container {
+    background:#FFFFFF;
+
+    .list__container--events {
+      list-style:none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        color:#333333;
+        padding:30px 40px;
+        background:#DEDEDE;
+        margin:20px 50px;
+        font-size:40px;
+      }
+    }
+  }
+
+  .page--contact__container {
+    background:#FFFFFF;
+  }
+
+
+  nav {
+    width:100%;
+    position: absolute;
+    bottom:0;
+    left:0;
+    height:150px;
+    background:#FFFFFF;
+    border:2px solid #333333;
+    display:flex;
+    align-items:center;
+
+    img {
+      width:200px;
+      height:120px;
+      background:red;
+      margin-left:30px;
+    }
+
+    ul {
+      list-style:none;
+      margin: 0 0 0 150px;
+      padding: 0;
+      width:calc(100% - 250px);
+      display:flex;
+      justify-content:space-around;
+
+      li {
+        width:30%;
+        border:2px solid #333;
+        text-align:center;
+        font-size:100px;
+        color:#333;
+      }
+    }
+  }
+
+  .page--popup {
+    width:90vw;
+    height:calc(100vh - 200px);
+    margin:3vh 5vw;
+    padding:80px;
+    background:#FFFFFF;
+    border-radius:20px;
+    text-align:center;
+    display:none;
+    @extend %shadowDeep;
+
+    h2 {
+      font-size:60px;
+      color:#333333;
+    }
+
+    .button--close {
+      width:80px;
+      height:80px;
+      background:#333;
+      border-radius:50%;
+      position: absolute;
+      top:30px;
+      right:30px;
+      z-index:10;
+    }
+  }
+}
+
+.visible {
+  display:block;
+}
+
+.button--selected {
+  background:#aa3333;
+  color:#FFFFFF;
+}
+
+
