@@ -1,0 +1,90 @@
+/** ANIMATIONS **/
+/** bounce in left animation **/
+@keyframes bounceInLeft {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+    transform: translate3d(5px, 0, 0);
+  }
+
+  to {
+    transform: none;
+    opacity:1;
+  }
+}
+
+.bounceInLeft {
+  opacity:0;
+  animation: bounceInLeft;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+/** fade animation **/
+@-webkit-keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+ }
+
+.fade {
+  opacity:0;
+  animation: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+/** HELPER CLASSES **/
+/** delays **/
+.delay1sec {
+  animation-delay: 1s;
+}
+
+.delay2sec {
+  animation-delay: 2s;
+}
+
+.delay3sec {
+  animation-delay: 3s;
+}
+
+.delay4sec {
+  animation-delay: 4s;
+}
+
+.delay5sec {
+  animation-delay: 5s;
+}
+
+/** shadows **/
+.shadow3px {
+ box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.3);
+}
+
+.shadow6px {
+ box-shadow: 0px 6px 6px 0px rgba(0,0,0,0.3);
+}
+
+.shadow9px {
+ box-shadow: 0px 9px 9px 0px rgba(0,0,0,0.3);
+}
+
+/** corners **/
+.corner {
+  border-radius:5px;
+}
