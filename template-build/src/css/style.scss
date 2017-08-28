@@ -28,7 +28,7 @@ body {
   height: 10px;
   background-clip: padding-box;
   -webkit-border-radius: 10px;
-  background-color: $red;
+  background-color: $black;
 
 }
 ::-webkit-scrollbar-button {
@@ -41,7 +41,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: $opacity;
+  background: $ltgrey;
   border-radius: 20px;
   border: 20px solid transparent;
   width:3px;
@@ -55,5 +55,4 @@ body {
   left:0;
   width:1920px;
   height:1080px;
-  background: $mainBackgroundGradient;
 }

@@ -11,7 +11,6 @@ var imagemin = require("gulp-imagemin");
 var babel = require("gulp-babel");
 var eslint = require("gulp-eslint");
 var mainBowerFiles = require('main-bower-files');
-const sketch = require("gulp-sketch");
 
 
 var browserSync = require("browser-sync");
@@ -96,15 +95,6 @@ gulp.task("watch", function(){
   gulp.watch("src/css/**/*.scss", ["styles"]);
 });
 
-gulp.task("sketch", () => {
-  gulp.src("../sketch-files/*.sketch")
-    .pipe(sketch({
-      export: "artboards",
-      formats: "png"
-    }))
-    .pipe(gulp.dest("./templates/"));
-});
-
 gulp.task("browser-sync", function() {
   browserSync({
     port: 8000,
@@ -113,8 +103,6 @@ gulp.task("browser-sync", function() {
     }
   });
 });
-
-gulp.task("templates", ["sketch"]);
 
 gulp.task("build", ["lint","styles", "bower", "bower-other", "components", "scripts", "imageminification"]);
 
