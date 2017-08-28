@@ -8,59 +8,56 @@ dependencies:
     - gcloud auth activate-service-account 452091732215@developer.gserviceaccount.com --key-file ../private-keys/storage-server/rva-media-library-ce0d2bd78b54.json
   post:
     - npm install bower -g
-    - bower install
+    - npm install gulp -g
+test:
+  override:
+    - echo "No tests needed" && echo 0;
 deployment:
   staging:
     branch: /(feature|fix|chore).*/
     commands:
-      - gulp build
       - >
         {
+          ls -d */ | xargs -I {} echo {} | cut -d'/' -f 1 | xargs -I {} bash -c "cd ./{} && if ls package.json; then npm install && bower install && gulp build; fi";
           client_secret=$(cat ../private-keys/client-authentication/tokens.txt | grep client_secret)
           refresh_token=$(cat ../private-keys/client-authentication/tokens.txt | grep refresh_token)
-
           if [ -z "$client_secret" -o -z "$refresh_token" ]; then
             echo "Missing client secret and refresh token";
             exit 1;
           fi
-
           # getting access token
           access_token=$(curl -s --data ""  "https://www.googleapis.com/oauth2/v3/token?client_id=614513768474.apps.googleusercontent.com&${client_secret}&${refresh_token}&grant_type=refresh_token" | python -c "import json,sys;obj=json.load(sys.stdin);print obj['access_token'];");
-
           # asking for upload url for index.html
-          curl --data "" -H "Authorization:Bearer $access_token" "https://storage-dot-rvaserver2.appspot.com/_ah/api/storage/v0.01/getUploadURI?companyId=${COMPANY_ID}&fileName=${FOLDER}%2Fstaging%2Findex.html";
-
+          ls -d */ | xargs -I {} echo {} | cut -d'/' -f 1 | xargs -I {} bash -c "curl --data '' -H 'Authorization:Bearer $access_token' 'https://storage-dot-rvaserver2.appspot.com/_ah/api/storage/v0.01/getUploadURI?companyId=${COMPANY_ID}&fileName=${FOLDER}%2Fstaging%2F{}%2Findex.html'";
           # asking for upload url for build folder
-          find "build" -mindepth 1 -maxdepth 10 -type f -print0 | xargs -0 -I {} curl --data "" -H "Authorization:Bearer $access_token" "https://storage-dot-rvaserver2.appspot.com/_ah/api/storage/v0.01/getUploadURI?companyId=${COMPANY_ID}&fileName=${FOLDER}%2Fstaging%2F{}"
+          ls -d */ | xargs -I {} echo {} | cut -d'/' -f 1 | xargs -I {} bash -c "find {}/build -mindepth 1 -maxdepth 10 -type f -print0 | xargs -0 -I {} curl --data '' -H 'Authorization:Bearer $access_token' 'https://storage-dot-rvaserver2.appspot.com/_ah/api/storage/v0.01/getUploadURI?companyId=${COMPANY_ID}&fileName=${FOLDER}%2Fstaging%2F{}'"
+          # uploading files
+          ls -d */ | xargs -I {} echo {} | cut -d'/' -f 1 | xargs -I {} bash -c "gsutil -m cp {}/index.html gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/staging/{} && gsutil -m cp -r {}/build gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/staging/{}"
+          exit 0;
         }
-      - gsutil -m cp index.html gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/staging
-      - gsutil -m cp -r build gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/staging
       - gsutil -m setmeta -r -h "Cache-Control:private, max-age=0" gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/staging
       - gsutil acl -r ch -u AllUsers:R gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/staging
   production:
     branch: master
     commands:
-      - gulp build
       - >
         {
+          ls -d */ | xargs -I {} echo {} | cut -d'/' -f 1 | xargs -I {} bash -c "cd ./{} && if ls package.json; then npm install && bower install && gulp build; fi";
           client_secret=$(cat ../private-keys/client-authentication/tokens.txt | grep client_secret)
           refresh_token=$(cat ../private-keys/client-authentication/tokens.txt | grep refresh_token)
-
           if [ -z "$client_secret" -o -z "$refresh_token" ]; then
             echo "Missing client secret and refresh token";
             exit 1;
           fi
-
           # getting access token
           access_token=$(curl -s --data ""  "https://www.googleapis.com/oauth2/v3/token?client_id=614513768474.apps.googleusercontent.com&${client_secret}&${refresh_token}&grant_type=refresh_token" | python -c "import json,sys;obj=json.load(sys.stdin);print obj['access_token'];");
-
           # asking for upload url for index.html
-          curl --data "" -H "Authorization:Bearer $access_token" "https://storage-dot-rvaserver2.appspot.com/_ah/api/storage/v0.01/getUploadURI?companyId=${COMPANY_ID}&fileName=${FOLDER}%2Fprod%2Findex.html";
-
+          ls -d */ | xargs -I {} echo {} | cut -d'/' -f 1 | xargs -I {} bash -c "curl --data '' -H 'Authorization:Bearer $access_token' 'https://storage-dot-rvaserver2.appspot.com/_ah/api/storage/v0.01/getUploadURI?companyId=${COMPANY_ID}&fileName=${FOLDER}%2Fprod%2F{}%2Findex.html'";
           # asking for upload url for build folder
-          find "build" -mindepth 1 -maxdepth 10 -type f -print0 | xargs -0 -I {} curl --data "" -H "Authorization:Bearer $access_token" "https://storage-dot-rvaserver2.appspot.com/_ah/api/storage/v0.01/getUploadURI?companyId=${COMPANY_ID}&fileName=${FOLDER}%2Fprod%2F{}"
+          ls -d */ | xargs -I {} echo {} | cut -d'/' -f 1 | xargs -I {} bash -c "find {}/build -mindepth 1 -maxdepth 10 -type f -print0 | xargs -0 -I {} curl --data '' -H 'Authorization:Bearer $access_token' 'https://storage-dot-rvaserver2.appspot.com/_ah/api/storage/v0.01/getUploadURI?companyId=${COMPANY_ID}&fileName=${FOLDER}%2Fprod%2F{}'"
+          # uploading files
+          ls -d */ | xargs -I {} echo {} | cut -d'/' -f 1 | xargs -I {} bash -c "gsutil -m cp {}/index.html gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/prod/{} && gsutil -m cp -r {}/build gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/prod/{}"
+          exit 0;
         }
-      - gsutil -m cp index.html gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/prod
-      - gsutil -m cp -r build gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/prod
       - gsutil -m setmeta -r -h "Cache-Control:private, max-age=0" gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/prod
       - gsutil acl -r ch -u AllUsers:R gs://risemedialibrary-${COMPANY_ID}/${FOLDER}/prod
