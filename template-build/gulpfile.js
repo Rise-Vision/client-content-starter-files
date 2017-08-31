@@ -1,26 +1,22 @@
-const gulp = require("gulp");
-const sass = require("gulp-sass");
-const cssmin = require("gulp-cssmin");
-const plumber = require("gulp-plumber");
-const concat = require("gulp-concat");
-const uglify = require("gulp-uglify");
-const autoprefixer = require("gulp-autoprefixer");
-const rename = require("gulp-rename");
-const sourcemaps = require("gulp-sourcemaps");
-const imagemin = require("gulp-imagemin");
-const babel = require("gulp-babel");
-const eslint = require("gulp-eslint");
-const mainBowerFiles = require('main-bower-files');
-const browserify = require("browserify");
-const babelify = require("babelify");
-const source = require("vinyl-source-stream");
-const buffer = require("vinyl-buffer");
+var gulp = require("gulp");
+var sass = require("gulp-sass");
+var cssmin = require("gulp-cssmin");
+var plumber = require("gulp-plumber");
+var concat = require("gulp-concat");
+var uglify = require("gulp-uglify");
+var autoprefixer = require("gulp-autoprefixer");
+var rename = require("gulp-rename");
+var sourcemaps = require("gulp-sourcemaps");
+var imagemin = require("gulp-imagemin");
+var babel = require("gulp-babel");
+var eslint = require("gulp-eslint");
+var mainBowerFiles = require('main-bower-files');
 
 
-const browserSync = require("browser-sync");
-const reload = browserSync.reload;
+var browserSync = require("browser-sync");
+var reload = browserSync.reload;
 
-gulp.task("styles", () => {
+gulp.task("styles", function(){
   gulp.src("src/css/style.scss")
     .pipe(plumber())
     .pipe(sass())
@@ -31,12 +27,8 @@ gulp.task("styles", () => {
     .pipe(reload({stream:true}))
 });
 
-gulp.task('lint', () => {
+gulp.task('lint', function() {
   return gulp.src('src/scripts/**/*.js').pipe(eslint({
-    "rules":{
-            "quotes": [1, "double"],
-            "semi": [1, "always"]
-          }
     }))
   .pipe(eslint.format('stylish'))
   // Brick on failure to be super strict
@@ -44,20 +36,20 @@ gulp.task('lint', () => {
 });
 
 gulp.task("scripts",function(){
-  gulp.src("src/scripts/**/*.js")
+  gulp.src(["src/scripts/**/*.js" , "../common/helper.js"])
     .pipe(sourcemaps.init())
-    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(babel({ presets: ['babel-preset-es2015'].map(require.resolve), plugins: ["babel-plugin-transform-function-bind"].map(require.resolve) }))
     .pipe(plumber())
     .pipe(concat("all.js"))
     .pipe(uglify())
     .pipe(rename({suffix:".min"}))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write("maps"))
     .pipe(gulp.dest("build/scripts/"))
     .pipe(reload({stream:true}))
 });
 
 //contact bower javascript to a single file
-gulp.task("bower", () => {
+gulp.task("bower", function () {
   return gulp.src(mainBowerFiles("**/*\.js"))
     .pipe(sourcemaps.init())
     .pipe(concat("bower.js"))
@@ -66,7 +58,7 @@ gulp.task("bower", () => {
 });
 
 //copy bower css & other files
-gulp.task("bower-other", () => {
+gulp.task("bower-other", function () {
   return gulp.src(mainBowerFiles({
     filter: function(file) {
       return file.substring(file.length -2) !== "js";
@@ -77,32 +69,33 @@ gulp.task("bower-other", () => {
 
 gulp.task( "components", () => {
   return gulp.src( [
-    "bower_components/webcomponentsjs/webcomponents-lite.js",
-    "bower_components/rise-google-sheet/rise-google-sheet.html",
-    "bower_components/rise-storage/rise-storage.html",
     "bower_components/underscore/underscore*.js",
     "bower_components/promise-polyfill/promise-polyfill-lite.html",
     "bower_components/promise-polyfill/Promise.js",
     "bower_components/rise-logger/rise-logger-utils.html",
     "bower_components/iron-ajax/iron-request.html",
-    "bower_components/jquery/dist/jquery.min.js",
-    "bower_components/moment/moment.js",
+    "bower_components/rise-financial/firebasejs/3.6.1/firebase-database.js",
+    "bower_components/rise-financial/firebasejs/3.6.1/firebase-app.js",
+    "bower_components/rise-financial/rise-financial.js",
+    "bower_components/byutv-jsonp/scripts/byutv-behaviors-jsonp.js",
+    "bower_components/byutv-jsonp/scripts/byutv-jsonp.js",
+    "bower_components/polymer/polymer-micro.html",
   ], { base: "./" } )
     .pipe( gulp.dest( "build/" ) );
 } );
 
-gulp.task("imageminification", () => {
+gulp.task("imageminification",function(){
   gulp.src("src/images/*")
     .pipe(imagemin())
     .pipe(gulp.dest("build/images"))
 });
 
-gulp.task("watch", () => {
+gulp.task("watch", function(){
   gulp.watch("src/scripts/**/*.js", ["lint", "scripts"]);
   gulp.watch("src/css/**/*.scss", ["styles"]);
 });
 
-gulp.task("browser-sync", () => {
+gulp.task("browser-sync", function() {
   browserSync({
     port: 8000,
     server: {
