@@ -1,4 +1,213 @@
-/** ANIMATIONS **/
+/** REPEATING ANIMATIONS**/
+/** flash animation**/
+@keyframes flash {
+  from, 50%, to {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+.flash {
+  opacity: 1;
+  animation-duration: 1s;
+  animation-name: flash;
+}
+
+/** shake animation **/
+@keyframes shake {
+  from, to {
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+.shake {
+  opacity: 1;
+  animation-duration: 1s;
+  animation-name: shake;
+}
+
+@keyframes rotateIn {
+  from {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, -360deg);
+    opacity: 1;
+  }
+
+  to {
+    transform-origin: center;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.rotateIn {
+  opacity: 1;
+  animation-duration: 10s;
+  animation-name: rotateIn;
+}
+
+@keyframes rotateInUpLeft {
+  from {
+    transform-origin: left bottom;
+    transform: rotate3d(0, 0, 1, 45deg);
+    opacity: 0;
+  }
+
+  to {
+    transform-origin: left bottom;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.rotateInUpLeft {
+  opacity: 0;
+  animation-duration: 1s;
+  animation-name: rotateInIUpLeft;
+  transform-origin: left bottom;
+}
+
+/** swing animation **/
+@keyframes swing {
+  20% {
+    opacity:1;
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  40% {
+    opacity:1;
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  60% {
+    opacity:1;
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  80% {
+    opacity:1;
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    opacity:1;
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+.swing {
+  opacity:1;
+  animation: swing;
+  animation-duration: 1s;
+  transform-origin: middle center;
+}
+
+/** pulse animation **/
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation-name: pulse;
+}
+
+/** INTRO ANIMATIONS **/
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInDown {
+  opacity: 0;
+  animation-duration:1s;
+  animation-name: slideInDown;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 1;
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft {
+  opacity: 0;
+  animation-duration:1s;
+  animation-name: slideInLeft;
+  animation-fill-mode: forwards;
+}
+
+/** bounce in down animation **/
+@keyframes bounceInDown {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -3000px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 25px, 0);
+  }
+
+  75% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, 5px, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+.bounceInDown {
+  opacity: 0;
+  animation-duration:1s;
+  animation-name: bounceInDown;
+  animation-fill-mode: forwards;
+}
+
 /** bounce in left animation **/
 @keyframes bounceInLeft {
   from, 60%, 75%, 90%, to {
@@ -30,8 +239,87 @@
 }
 
 .bounceInLeft {
-  opacity:0;
-  animation: bounceInLeft;
+  animation-duration: 1s;
+  opacity: 0;
+  animation-name: bounceInLeft;
+  animation-fill-mode: forwards;
+}
+
+/** bounce in right animation **/
+@keyframes bounceInRight {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(-25px, 0, 0);
+  }
+
+  75% {
+    transform: translate3d(10px, 0, 0);
+  }
+
+  90% {
+    transform: translate3d(-5px, 0, 0);
+  }
+
+  to {
+    transform: none;
+    opacity:1;
+  }
+}
+
+.bounceInRight {
+  animation-duration: 1s;
+  opacity: 0;
+  animation-name: bounceInRight;
+  animation-fill-mode: forwards;
+}
+
+/** bounce in animation **/
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scale3d(.97, .97, .97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.bounceIn {
+  opacity: 0;
+  animation-name: bounceIn;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
@@ -49,26 +337,47 @@
   animation-fill-mode: forwards;
 }
 
+
 /** HELPER CLASSES **/
 /** delays **/
 .delay1sec {
   animation-delay: 1s;
 }
 
+.delay1halfsec {
+  animation-delay: 1.5s;
+}
+
 .delay2sec {
   animation-delay: 2s;
+}
+
+.delay2halfsec {
+  animation-delay: 2.5s;
 }
 
 .delay3sec {
   animation-delay: 3s;
 }
 
+.delay3halfsec {
+  animation-delay: 3.5s;
+}
+
 .delay4sec {
   animation-delay: 4s;
 }
 
+.delay4halfsec {
+  animation-delay: 4.5s;
+}
+
 .delay5sec {
   animation-delay: 5s;
+}
+
+.delay5halfsec {
+  animation-delay: 5.5s;
 }
 
 /** shadows **/
