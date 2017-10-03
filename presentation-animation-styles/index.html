@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Animation Testing</title>
+   <link rel="stylesheet" href="rise-animation-styles.css">
+</head>
+<body>
+<div id="placeholder1" class="bounceIn delay1sec"><h1>Hello World</h1></div>
+<div id="placeholder2" class="bounceIn delay2sec"><h1>Hello World</h1></div>
+
+<script>
+          setInterval(function(){
+            $('#placeholder1').toggleClass('shake');
+            $('#placeholder2').toggleClass('shake');
+      },5000);
+        </script>
+</body>
+</html>
